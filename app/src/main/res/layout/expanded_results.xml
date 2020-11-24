@@ -403,16 +403,16 @@
             android:layout_marginLeft="20dp"
             android:layout_marginBottom="10dp"
             android:textAppearance="@style/TextAppearance.MaterialComponents.Headline6"
-            android:text="Reviews" />
+            android:text="Plot" />
 
         <TextView
-            android:id="@+id/tvReview"
+            android:id="@+id/tvPlot"
             android:layout_width="match_parent"
             android:layout_height="95dp"
             android:layout_marginLeft="10dp"
             android:layout_marginRight="10dp"
             android:scrollbars="vertical"
-            android:text="Loading NYT movie review..." />
+            android:text="Loading..." />
 
     </LinearLayout>
 

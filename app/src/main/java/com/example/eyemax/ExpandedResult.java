@@ -46,7 +46,7 @@ public class ExpandedResult extends Activity {
     private String MY_API_MOVIES_KEY;
 
     //declare UI
-    private TextView tvTitle, tvYear, tvGenre;
+    private TextView tvTitle, tvYear, tvGenre, tvPlot;
 
     private ImageView ivPoster;
 
@@ -56,6 +56,7 @@ public class ExpandedResult extends Activity {
     private int movieYear;
     private String genre;
     private String posterUrl;
+    private String plot;
     private ArrayList<Integer> tvNameID = new ArrayList<>();
     private ArrayList<Integer> tvCharID = new ArrayList<>();
     private ArrayList<Integer> ivCastID = new ArrayList<>();
@@ -82,6 +83,7 @@ public class ExpandedResult extends Activity {
         //initialize information fields
         genre = "";
         posterUrl = "";
+        plot = "";
 
         actors = new ArrayList<>();
 
@@ -90,6 +92,7 @@ public class ExpandedResult extends Activity {
             System.out.println("found " + movieTitle + " in storage");
             genre = sharedPref.getString(movieTitle + " Genre", null);
             posterUrl = sharedPref.getString(movieTitle + " Poster URL", null);
+            plot = sharedPref.getString(movieTitle + " Plot", null);
             String actorNamesSet = sharedPref.getString(movieTitle + " Actor Names",
                     null);
             String actorCharactersSet = sharedPref.getString(movieTitle + " Actor Characters",
@@ -132,6 +135,7 @@ public class ExpandedResult extends Activity {
         tvTitle = findViewById(R.id.tvTitle);
         tvYear = findViewById(R.id.tvYear);
         tvGenre = findViewById(R.id.tvGenre);
+        tvPlot = findViewById(R.id.tvPlot);
 
         //ID arrays for referencing in loops
         tvNameID.add(R.id.tvName1);
@@ -181,14 +185,15 @@ public class ExpandedResult extends Activity {
 
         //set movie poster, release year, genre, and cast
 
-        if(posterUrl.equals("")) {
-            //if posterUrl is not in cache, retrieve it from api
-            getMoviePoster();
+        if(posterUrl.equals("") && plot.equals("")) {
+            //if posterUrl and plot are not in cache, retrieve it from api
+            getMoviePosterAndPlot();
         } else {
-            //if posterUrl is cached, get image from url as a drawable and display it
+            //if posterUrl and plot are cached, get image from url as a drawable and display it
             InputStream is = (InputStream) new URL(posterUrl).getContent();
             Drawable d = Drawable.createFromStream(is, "src name");
             ivPoster.setImageDrawable(d);
+            tvPlot.setText(plot);
         }
 
         if(genre.equals("")) {
@@ -326,8 +331,8 @@ public class ExpandedResult extends Activity {
         queue.add(objectRequest);
     }
 
-    //set movie poster
-    private void getMoviePoster() {
+    //set movie poster and plot
+    private void getMoviePosterAndPlot() {
 
         //request to retrieve posterUrl
         JsonObjectRequest objectRequest = new JsonObjectRequest(
@@ -338,10 +343,14 @@ public class ExpandedResult extends Activity {
                     try {
                         JSONObject jsonObject = response.getJSONObject("data");
                         String posterURL = jsonObject.getString("posterUrl");
+                        plot = jsonObject.getString("simplePlot");
+
                         System.out.println(posterURL);
+                        System.out.println(plot);
 
                         SharedPreferences.Editor editor = sharedPref.edit();
                         editor.putString(movieTitle + " Poster URL", posterURL);
+                        editor.putString(movieTitle + " Plot", plot);
                         editor.apply();
 
                         //get movie poster as drawable from posterUrl and display it
@@ -349,6 +358,8 @@ public class ExpandedResult extends Activity {
                         InputStream is = (InputStream) new URL(posterURL).getContent();
                         Drawable d = Drawable.createFromStream(is, "src name");
                         ivPoster.setImageDrawable(d);
+
+                        tvPlot.setText(plot);
 
                     } catch (JSONException | MalformedURLException e) {
                         e.printStackTrace();
