@@ -46,14 +46,14 @@
                     android:id="@+id/tvTitle"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="Loading Title"
+                    android:text="@string/loading_title"
                     android:textAppearance="@style/TextAppearance.AppCompat.Large" />
 
                 <TextView
                     android:id="@+id/tvYear"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:text="Released:"
+                    android:text="@string/released"
                     android:textAppearance="@style/TextAppearance.AppCompat.Caption" />
 
                 <TextView
@@ -61,7 +61,7 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:textAppearance="@style/TextAppearance.AppCompat.Caption"
-                    android:text="Genre:" />
+                    android:text="@string/genre" />
             </LinearLayout>
 
             <ImageView
@@ -79,7 +79,7 @@
             android:layout_marginLeft="20dp"
             android:layout_marginBottom="10dp"
             android:textAppearance="@style/TextAppearance.MaterialComponents.Headline6"
-            android:text="Cast" />
+            android:text="@string/cast" />
 
         <HorizontalScrollView
             android:id="@+id/hsvCastList"
@@ -103,7 +103,7 @@
                     <ImageView
                         android:id="@+id/ivCast1"
                         android:layout_width="100dp"
-                        android:layout_height="wrap_content"
+                        android:layout_height="0dp"
                         android:layout_weight="1"
                         app:srcCompat="@drawable/bpitt1" />
 
@@ -111,14 +111,14 @@
                         android:id="@+id/tvName1"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:text="Loading name..."
+                        android:text="@string/loading_name"
                         android:textAppearance="@style/TextAppearance.MaterialComponents.Subtitle2" />
 
                     <TextView
                         android:id="@+id/tvChar1"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:text="Loading Character..."
+                        android:text="@string/loading_character"
                         android:textAppearance="@style/TextAppearance.MaterialComponents.Caption"/>
 
                 </LinearLayout>
@@ -134,7 +134,7 @@
                     <ImageView
                         android:id="@+id/ivCast2"
                         android:layout_width="100dp"
-                        android:layout_height="wrap_content"
+                        android:layout_height="0dp"
                         android:layout_weight="1"
                         app:srcCompat="@drawable/bpitt1" />
 
@@ -142,14 +142,14 @@
                         android:id="@+id/tvName2"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:text="Loading name..."
+                        android:text="@string/loading_name"
                         android:textAppearance="@style/TextAppearance.MaterialComponents.Subtitle2" />
 
                     <TextView
                         android:id="@+id/tvChar2"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:text="Loading Character..."
+                        android:text="@string/loading_character"
                         android:textAppearance="@style/TextAppearance.MaterialComponents.Caption"/>
                 </LinearLayout>
 

@@ -24,7 +24,7 @@
             android:id="@+id/buttonPreferences"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="Preferences" />
+            android:text="@string/preferences" />
 
         <TextView
             android:layout_width="match_parent"
@@ -44,27 +44,24 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:orientation="horizontal" >
-<!--            style="?android:attr/buttonBarStyle">-->
 
             <Button
                 android:id="@+id/UploadBtn"
                 android:layout_width="0dp"
                 android:layout_weight="1"
                 android:layout_height="wrap_content"
-                android:text="Upload"
+                android:text="@string/upload"
                 android:textAppearance="?android:textAppearanceMedium"
                 android:textStyle="bold"/>
-<!--                style="?android:buttonBarButtonStyle"/>-->
 
             <Button
                 android:id="@+id/button_identify"
                 android:layout_width="0dp"
                 android:layout_weight="2"
                 android:layout_height="wrap_content"
-                android:text="Identify"
+                android:text="@string/identify"
                 android:textAppearance="?android:textAppearanceMedium"
                 android:textStyle="bold" />
-<!--                style="?android:buttonBarButtonStyle"/>-->
         </LinearLayout>
 
         <LinearLayout
@@ -78,14 +75,14 @@
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
                 android:inputType="text"
-                android:hint="Enter an actor"/>
+                android:hint="@string/enter_an_actor"/>
 
             <Button
                 android:id="@+id/buttonSearch"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
-                android:text="Search"/>
+                android:text="@string/search"/>
         </LinearLayout>
     </LinearLayout>
 
