@@ -12,6 +12,12 @@
         android:layout_height="match_parent"
         android:orientation="vertical">
 
+        <Button
+            android:id="@+id/buttonPreferences"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="@string/preferences" />
+
         <TextView
             android:id="@+id/text"
             android:layout_width="wrap_content"
@@ -19,12 +25,6 @@
             android:text="@string/welcome_to_eyemax"
             tools:layout_editor_absoluteX="8dp"
             tools:layout_editor_absoluteY="8dp" />
-
-        <Button
-            android:id="@+id/buttonPreferences"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:text="@string/preferences" />
 
         <TextView
             android:layout_width="match_parent"
