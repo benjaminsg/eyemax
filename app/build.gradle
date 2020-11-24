@@ -1,0 +1,52 @@
+apply plugin: 'com.android.application'
+
+android {
+    compileSdkVersion 30
+    buildToolsVersion "30.0.2"
+
+    compileOptions {
+        // Support for Java 8 features
+        coreLibraryDesugaringEnabled true
+        sourceCompatibility JavaVersion.VERSION_1_8
+        targetCompatibility JavaVersion.VERSION_1_8
+    }
+
+    defaultConfig {
+        applicationId "com.example.eyemax"
+        minSdkVersion 16
+        targetSdkVersion 30
+        multiDexEnabled true
+        versionCode 1
+        versionName "1.0"
+
+        testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
+    }
+
+    buildTypes {
+        release {
+            minifyEnabled false
+            proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
+        }
+    }
+}
+
+dependencies {
+    implementation fileTree(dir: "libs", include: ["*.jar"])
+    implementation 'androidx.appcompat:appcompat:1.2.0'
+    implementation 'androidx.constraintlayout:constraintlayout:2.0.4'
+    implementation "androidx.preference:preference:1.1.1"
+    testImplementation 'junit:junit:4.12'
+    androidTestImplementation 'androidx.test.ext:junit:1.1.2'
+    androidTestImplementation 'androidx.test.espresso:espresso-core:3.3.0'
+
+    implementation 'com.amplifyframework:core:1.4.1'
+    implementation 'com.amplifyframework:aws-predictions:1.0.0'
+    implementation 'com.amplifyframework:aws-auth-cognito:1.0.0'
+    implementation 'com.amplifyframework:aws-api:1.4.1'
+    implementation 'com.amplifyframework:aws-datastore:1.4.1'
+    implementation 'com.android.support:multidex:1.0.3'
+    implementation 'com.amazonaws:aws-android-sdk-rekognition:2.10.0'
+    implementation 'com.android.volley:volley:1.1.1'
+
+    coreLibraryDesugaring 'com.android.tools:desugar_jdk_libs:1.0.10'
+}

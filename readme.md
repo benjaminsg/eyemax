@@ -1,0 +1,1 @@
+Main branch app requires setup of AWS Amplify. For detailed instructions plaese review the Amplify documentation: https://docs.amplify.aws/start/getting-started/setup/q/integration/android#prerequisites

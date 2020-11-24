@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <!-- Dark Mode ListPreference -->
+    <string-array name="dark_mode_entries">
+        <item>Light Mode Selected</item>
+        <item>Dark Mode Selected</item>
+    </string-array>
+
+    <string-array name="dark_mode_values">
+        <item>MODE_NIGHT_NO</item>
+        <item>MODE_NIGHT_YES</item>
+    </string-array>
+
+
+</resources>

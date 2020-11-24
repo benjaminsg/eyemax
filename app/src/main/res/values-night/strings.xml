@@ -1,0 +1,15 @@
+<resources>
+    <string name="app_name">Eyemax</string>
+    <string name="welcome_to_eyemax">Welcome to Eyemax</string>
+    <string name="please_upload_an_image_of_actors_from_any_tv_show_or_movie">Please upload an image of actors from any TV show or movie</string>
+    <string name="action_settings">Settings</string>
+
+    <string name="dark_mode">Dark Mode</string>
+    <string name="dark_mode_def_value">MODE_NIGHT_FOLLOW_SYSTEM</string>
+
+    <string name="display_text">Display Text</string>
+    <string name="change_text_color">Text Color</string>
+    <string name="text_size">Text Size</string>
+    <string name="match_sensitivity">Match Sensitivity</string>
+    <string name="match_summary">Choose level of match accuracy</string>
+</resources>

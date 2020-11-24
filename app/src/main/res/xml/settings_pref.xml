@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<PreferenceScreen xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <PreferenceCategory>
+
+        <SeekBarPreference
+            android:id="@+id/matches"
+            android:defaultValue="70"
+            android:key="@string/match_sensitivity"
+            android:summary="@string/match_summary"
+            android:max="100"
+            android:title="Match Accuracy"
+            app:showSeekBarValue="true"
+            app:defaultValue="70"
+            app:min="0"
+            app:seekBarIncrement="1"
+            app:updatesContinuously="true"/>
+    </PreferenceCategory>
+
+</PreferenceScreen>
