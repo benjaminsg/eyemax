@@ -9,6 +9,7 @@ import android.util.Log;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ListView;
+import android.widget.Toast;
 
 import com.android.volley.Request;
 import com.android.volley.RequestQueue;
@@ -213,7 +214,24 @@ public class DisplayMoviesActivity extends Activity {
                     System.out.println("listview movie name is: " + clickedMovie.getTitle());
                     System.out.println("listview movie imdbid is: " + clickedMovie.getImdbId());
                     System.out.println("listview movie year is: " + clickedMovie.getReleaseYear());
-                    startActivity(intent);
+
+                    //check if the actors have common movies
+                    if(clickedMovie.getTitle().equals("No common " +
+                            "movies")) {
+                        //display a toast if there are none
+                        Context context =
+                                getApplicationContext();
+                        CharSequence text = "No common " +
+                                "movies were found for " +
+                                "the provided actors";
+                        int duration = Toast.LENGTH_SHORT;
+
+                        Toast toast = Toast.makeText(
+                                context, text, duration);
+                        toast.show();
+                    } else {
+                        startActivity(intent);
+                    }
                 }
             });
         }
