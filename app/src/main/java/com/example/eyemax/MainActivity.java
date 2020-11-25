@@ -18,6 +18,7 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageView;
+import android.widget.SearchView;
 import android.widget.Toast;
 
 import java.io.ByteArrayOutputStream;
@@ -44,6 +45,8 @@ public class MainActivity extends AppCompatActivity {
 
     private Button buttonIdentify;
 
+    private SearchView searchView;
+
     ImageView IDProf;
     Button Upload_Btn;
 
@@ -58,18 +61,17 @@ public class MainActivity extends AppCompatActivity {
         setContentView(R.layout.activity_main);
 
         //initialize UI
-        editTextActor = (EditText) findViewById(R.id.editTextActor);
+        searchView = (SearchView) findViewById(R.id.searchView);
 
-        Button buttonSearch = (Button) findViewById(R.id.buttonSearch);
+        //handle text actor search
+        searchView.setOnQueryTextListener(new SearchView.OnQueryTextListener() {
 
-        //when search button is clicked pass search
-        buttonSearch.setOnClickListener(new View.OnClickListener() {
             @Override
-            public void onClick(View v) {
-                //if edit text actor contains text create intent containing it, otherwise display
-                //a toast asking the user to populate it to continue
-                if(editTextActor.getText().length() > 0) {
-                    search(v);
+            public boolean onQueryTextSubmit(String query) {
+                //only search if an actor has been typed in
+                if(query.length() > 0) {
+                    System.out.println("We will search");
+                    search(query);
                 } else {
                     Context context = getApplicationContext();
                     CharSequence text = "Please enter an actor to search before proceeding";
@@ -78,7 +80,14 @@ public class MainActivity extends AppCompatActivity {
                     Toast toast = Toast.makeText(context, text, duration);
                     toast.show();
                 }
+                return false;
             }
+
+            @Override
+            public boolean onQueryTextChange(String newText) {
+                return false;
+            }
+
         });
 
         buttonIdentify = (Button) findViewById(R.id.button_identify);
@@ -156,10 +165,9 @@ public class MainActivity extends AppCompatActivity {
     }
 
     //create intent for IdentifyActivity containing actor search string and start it
-    public void search(View v) {
+    public void search(String actorName) {
         Intent intent = new Intent(this, IdentifyActivity.class);
 
-        String actorName = editTextActor.getText().toString();
         intent.putExtra("searchedActor", actorName);
         startActivity(intent);
     }

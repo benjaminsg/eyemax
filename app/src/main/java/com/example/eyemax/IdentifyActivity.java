@@ -66,7 +66,11 @@ public class IdentifyActivity extends Activity {
         if(getIntent().hasExtra("searchedActor")) {
             //if we were passed a search name, we assign as the only element of foundCelebs
             foundCelebs = new ArrayList<>();
-            foundCelebs.add(getIntent().getStringExtra("searchedActor"));
+            String actorQuery = getIntent().getStringExtra("searchedActor");
+            String[] actors = actorQuery.split(", ");
+            for(String actor: actors){
+                foundCelebs.add(actor);
+            }
         } else {
             //if we were passed an image, we decode it and call getCelebrities to identify
             byte[] byteArray = getIntent().getByteArrayExtra("image");
