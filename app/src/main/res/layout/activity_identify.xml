@@ -27,6 +27,14 @@
             android:layout_height="wrap_content"
             android:orientation="horizontal">
 
+            <EditText
+                android:id="@+id/addText"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:hint="Enter name of actor to add"
+                android:imeOptions="actionSend"
+                android:inputType="text" />
+
             <Button
                 android:id="@+id/addBtn"
                 android:layout_width="0dp"
@@ -34,11 +42,6 @@
                 android:layout_weight="1"
                 android:text="@string/add" />
 
-            <EditText
-                android:id="@+id/addText"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:hint="Enter name of actor to add" />
         </LinearLayout>
 
         <ListView

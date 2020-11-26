@@ -16,12 +16,15 @@ import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.os.Bundle;
 import android.os.StrictMode;
+import android.view.KeyEvent;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
+import android.view.inputmethod.EditorInfo;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ListView;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import com.amazonaws.auth.BasicAWSCredentials;
@@ -136,6 +139,35 @@ public class IdentifyActivity extends AppCompatActivity {
 
         //instantiate custom adapter
         adapter = new NamesListAdapter(foundCelebs, this);
+
+        //handles enter press on hardware keyboards
+        addText.setOnKeyListener(new View.OnKeyListener() {
+            @Override
+            public boolean onKey(View v, int keyCode, KeyEvent event) {
+                if ((event.getAction() == KeyEvent.ACTION_DOWN) &&
+                        (keyCode == KeyEvent.KEYCODE_ENTER )) {
+                    // Perform action on key press
+                    foundCelebs.add(addText.getText().toString());
+                    adapter.notifyDataSetChanged();
+                    return true;
+                }
+                return false;
+            }
+        });
+
+        //add to list if the user hits "send" on the virtual keyboard
+        addText.setOnEditorActionListener(new TextView.OnEditorActionListener() {
+            @Override
+            public boolean onEditorAction(TextView v, int actionId, KeyEvent event) {
+                boolean handled = false;
+                if (actionId == EditorInfo.IME_ACTION_SEND) {
+                    foundCelebs.add(addText.getText().toString());
+                    adapter.notifyDataSetChanged();
+                    handled = true;
+                }
+                return handled;
+            }
+        });
 
         lView.setAdapter(adapter);
 
