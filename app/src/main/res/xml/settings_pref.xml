@@ -19,4 +19,14 @@
             app:updatesContinuously="true"/>
     </PreferenceCategory>
 
+    <Preference
+        android:title="Clear cache"
+        android:key="resetCacheButton"
+        android:summary="Removes cached local data" />
+
+    <Preference
+        android:title="Reset defaults"
+        android:key="restoreDefaultsButton"
+        android:summary="Restores all preferences to their default values" />
+
 </PreferenceScreen>
