@@ -1,11 +1,12 @@
 package com.example.eyemax;
 
-import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.util.Log;
+import android.view.Menu;
+import android.view.MenuItem;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ListView;
@@ -27,13 +28,16 @@ import java.util.ArrayList;
 import java.util.HashMap;
 
 import androidx.annotation.Nullable;
+import androidx.appcompat.app.AppCompatActivity;
+import androidx.appcompat.widget.Toolbar;
+import androidx.core.content.ContextCompat;
 
 /*
  * Activity for getting and displaying all of the movies the group of passed in actors have in
  * common and then displaying them in a list view.
  */
 
-public class DisplayMoviesActivity extends Activity {
+public class DisplayMoviesActivity extends AppCompatActivity {
 
     //Array list containing all of the movies which the actors have in common
     private ArrayList<Movie> sharedFilms;
@@ -63,6 +67,13 @@ public class DisplayMoviesActivity extends Activity {
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_display_movies);
+
+        //setup and inflate the toolbar
+        Toolbar toolbar = (Toolbar) findViewById(R.id.my_toolbar);
+        //set toolbar text to white
+        toolbar.setTitleTextColor(ContextCompat.getColor(getApplicationContext(),
+                R.color.backgroundColor));
+        setSupportActionBar(toolbar);
 
         //list of celebrities is passed in via intent
         ArrayList<String> foundCelebs = getIntent().getStringArrayListExtra("foundCelebs");
@@ -204,7 +215,7 @@ public class DisplayMoviesActivity extends Activity {
                 public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
 
                     //pass information about the given movie to the expanded result activity
-                    Intent intent = new Intent(getBaseContext(), ExpandedResult.class);
+                    Intent intent = new Intent(getBaseContext(), ExpandedResultActivity.class);
                     Movie clickedMovie = sharedFilms.get(position);
 
                     intent.putExtra("Movie_Name", clickedMovie.getTitle());
@@ -235,6 +246,37 @@ public class DisplayMoviesActivity extends Activity {
                 }
             });
         }
+    }
+
+    @Override
+    public boolean onCreateOptionsMenu(Menu menu) {
+        // Inflate the menu; this adds items to the action bar if it is present.
+        getMenuInflater().inflate(R.menu.settings_menu, menu);
+        return true;
+    }
+
+    //handle when the user selects a toolbar item
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+        switch (item.getItemId()) {
+            case R.id.action_settings:
+                // User chose the "Settings" item, show the app settings UI...
+                settings();
+                return true;
+
+            default:
+                // If we got here, the user's action was not recognized.
+                // Invoke the superclass to handle it.
+                return super.onOptionsItemSelected(item);
+
+        }
+    }
+
+    //create intent for SettingsActivity and start it
+    public void settings() {
+        Intent settings = new Intent(this, SettingsActivity.class);
+
+        startActivity(settings);
     }
 
     //get the filmography for a given celeb

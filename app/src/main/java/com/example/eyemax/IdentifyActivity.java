@@ -1,9 +1,11 @@
 package com.example.eyemax;
 
 import androidx.annotation.Nullable;
+import androidx.appcompat.app.AppCompatActivity;
+import androidx.appcompat.widget.Toolbar;
+import androidx.core.content.ContextCompat;
 import androidx.preference.PreferenceManager;
 
-import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
@@ -11,6 +13,8 @@ import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.os.Bundle;
 import android.os.StrictMode;
+import android.view.Menu;
+import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
@@ -35,7 +39,7 @@ import java.util.List;
  * Activity to identify the celebrities in an image
  */
 
-public class IdentifyActivity extends Activity {
+public class IdentifyActivity extends AppCompatActivity {
 
     //declare api string constants
     private String AWS_ACCESS_KEY;
@@ -48,6 +52,13 @@ public class IdentifyActivity extends Activity {
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_identify);
+
+        //setup and inflate the toolbar
+        Toolbar toolbar = (Toolbar) findViewById(R.id.my_toolbar);
+        //set toolbar text to white
+        toolbar.setTitleTextColor(ContextCompat.getColor(getApplicationContext(),
+                R.color.backgroundColor));
+        setSupportActionBar(toolbar);
 
         //declare array list containing names of found celebrities
         ArrayList<String> foundCelebs;
@@ -121,6 +132,37 @@ public class IdentifyActivity extends Activity {
                 }
             }
         });
+    }
+
+    @Override
+    public boolean onCreateOptionsMenu(Menu menu) {
+        // Inflate the menu; this adds items to the action bar if it is present.
+        getMenuInflater().inflate(R.menu.settings_menu, menu);
+        return true;
+    }
+
+    //handle when the user selects a toolbar item
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+        switch (item.getItemId()) {
+            case R.id.action_settings:
+                // User chose the "Settings" item, show the app settings UI...
+                settings();
+                return true;
+
+            default:
+                // If we got here, the user's action was not recognized.
+                // Invoke the superclass to handle it.
+                return super.onOptionsItemSelected(item);
+
+        }
+    }
+
+    //create intent for SettingsActivity and start it
+    public void settings() {
+        Intent settings = new Intent(this, SettingsActivity.class);
+
+        startActivity(settings);
     }
 
     //get celebrities from AWS Rekognition

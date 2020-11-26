@@ -1,16 +1,21 @@
 package com.example.eyemax;
 
-import android.app.Activity;
 import android.content.Context;
+import android.content.Intent;
 import android.content.SharedPreferences;
 import android.graphics.drawable.Drawable;
 import android.os.Bundle;
 import android.os.StrictMode;
 import android.util.Log;
+import android.view.Menu;
+import android.view.MenuItem;
 import android.widget.ImageView;
 import android.widget.TextView;
 
 import androidx.annotation.Nullable;
+import androidx.appcompat.app.AppCompatActivity;
+import androidx.appcompat.widget.Toolbar;
+import androidx.core.content.ContextCompat;
 
 import com.android.volley.Request;
 import com.android.volley.RequestQueue;
@@ -32,7 +37,7 @@ import java.util.ArrayList;
  * cast, and images.
  */
 
-public class ExpandedResult extends Activity {
+public class ExpandedResultActivity extends AppCompatActivity {
 
     //declare important objects
     private RequestQueue queue;
@@ -64,7 +69,14 @@ public class ExpandedResult extends Activity {
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.expanded_results);
+        setContentView(R.layout.activity_expanded_results);
+
+        //setup and inflate the toolbar
+        Toolbar toolbar = (Toolbar) findViewById(R.id.my_toolbar);
+        //set toolbar text to white
+        toolbar.setTitleTextColor(ContextCompat.getColor(getApplicationContext(),
+                R.color.backgroundColor));
+        setSupportActionBar(toolbar);
 
         //initialize shared preferences
         sharedPref = getPreferences(Context.MODE_PRIVATE);
@@ -124,6 +136,37 @@ public class ExpandedResult extends Activity {
         } catch (IOException e) {
             e.printStackTrace();
         }
+    }
+
+    @Override
+    public boolean onCreateOptionsMenu(Menu menu) {
+        // Inflate the menu; this adds items to the action bar if it is present.
+        getMenuInflater().inflate(R.menu.settings_menu, menu);
+        return true;
+    }
+
+    //handle when the user selects a toolbar item
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+        switch (item.getItemId()) {
+            case R.id.action_settings:
+                // User chose the "Settings" item, show the app settings UI...
+                settings();
+                return true;
+
+            default:
+                // If we got here, the user's action was not recognized.
+                // Invoke the superclass to handle it.
+                return super.onOptionsItemSelected(item);
+
+        }
+    }
+
+    //create intent for SettingsActivity and start it
+    public void settings() {
+        Intent settings = new Intent(this, SettingsActivity.class);
+
+        startActivity(settings);
     }
 
     //lots of views to initialize

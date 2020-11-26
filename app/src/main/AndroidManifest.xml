@@ -31,7 +31,7 @@
         <activity android:name=".IdentifyActivity" android:screenOrientation="portrait"/>
         <activity android:name=".SettingsActivity" android:screenOrientation="portrait"/>
         <activity android:name=".DisplayMoviesActivity" android:screenOrientation="portrait"/>
-        <activity android:name=".ExpandedResult" android:screenOrientation="portrait"/>
+        <activity android:name=".ExpandedResultActivity" android:screenOrientation="portrait"/>
         <provider
             android:name="androidx.core.content.FileProvider"
             android:authorities="${applicationId}.provider"

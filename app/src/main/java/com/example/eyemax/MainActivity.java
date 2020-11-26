@@ -10,10 +10,15 @@ import android.os.Bundle;
 
 import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.appcompat.widget.Toolbar;
+import androidx.core.content.ContextCompat;
 import androidx.core.content.FileProvider;
+import androidx.multidex.BuildConfig;
 
 import android.os.Environment;
 import android.provider.MediaStore;
+import android.view.Menu;
+import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
@@ -59,6 +64,13 @@ public class MainActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+
+        //setup and inflate the toolbar
+        Toolbar toolbar = (Toolbar) findViewById(R.id.my_toolbar);
+        //set toolbar text to white
+        toolbar.setTitleTextColor(ContextCompat.getColor(getApplicationContext(),
+                R.color.backgroundColor));
+        setSupportActionBar(toolbar);
 
         //initialize UI
         searchView = (SearchView) findViewById(R.id.searchView);
@@ -112,17 +124,6 @@ public class MainActivity extends AppCompatActivity {
             }
         });
 
-        Button buttonPreferences = (Button) findViewById(R.id.buttonPreferences);
-
-        //button for creating intent for navigating to settings
-        buttonPreferences.setOnClickListener(new View.OnClickListener(){
-
-            @Override
-            public void onClick(View v) {
-                settings(v);
-            }
-        });
-
         IDProf=(ImageView)findViewById(R.id.IdProf);
         Upload_Btn=(Button)findViewById(R.id.UploadBtn);
 
@@ -144,6 +145,30 @@ public class MainActivity extends AppCompatActivity {
 
     }
 
+    @Override
+    public boolean onCreateOptionsMenu(Menu menu) {
+        // Inflate the menu; this adds items to the action bar if it is present.
+        getMenuInflater().inflate(R.menu.settings_menu, menu);
+        return true;
+    }
+
+    //handle when the user selects a toolbar item
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+        switch (item.getItemId()) {
+            case R.id.action_settings:
+                // User chose the "Settings" item, show the app settings UI...
+                settings();
+                return true;
+
+            default:
+                // If we got here, the user's action was not recognized.
+                // Invoke the superclass to handle it.
+                return super.onOptionsItemSelected(item);
+
+        }
+    }
+
     //create intent for IdenitfyActivity passing image
     public void identify(View v) {
         Intent identify = new Intent(this, IdentifyActivity.class);
@@ -158,7 +183,7 @@ public class MainActivity extends AppCompatActivity {
     }
 
     //create intent for SettingsActivity and start it
-    public void settings(View v) {
+    public void settings() {
         Intent settings = new Intent(this, SettingsActivity.class);
 
         startActivity(settings);
