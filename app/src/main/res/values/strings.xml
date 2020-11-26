@@ -26,4 +26,6 @@
     <string name="loading_character">Loading Character...</string>
     <string name="textview">TextView</string>
     <string name="delete">Delete</string>
+    <string name="next">Next</string>
+    <string name="add_hint">Enter Actor Name</string>
 </resources>
