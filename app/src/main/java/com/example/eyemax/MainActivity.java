@@ -273,7 +273,8 @@ public class MainActivity extends AppCompatActivity {
 
     //create menu for choosing option for getting photo
     private void selectImage() {
-        final CharSequence[] options = { getString(R.string.take_photo), getString(R.string.choose_from_gallery), getString(R.string.cancel) };
+        final CharSequence[] options = { getString(R.string.take_photo), getString(
+                R.string.choose_from_gallery), getString(R.string.cancel) };
         AlertDialog.Builder builder = new AlertDialog.Builder(MainActivity.this);
         builder.setTitle(getString(R.string.add_photo));
         builder.setItems(options, new DialogInterface.OnClickListener() {
