@@ -49,4 +49,8 @@ dependencies {
     implementation 'com.android.volley:volley:1.1.1'
 
     coreLibraryDesugaring 'com.android.tools:desugar_jdk_libs:1.0.10'
+
+    //Butterknife dependencies
+    implementation 'com.jakewharton:butterknife:10.2.3'
+    annotationProcessor 'com.jakewharton:butterknife-compiler:10.2.3'
 }

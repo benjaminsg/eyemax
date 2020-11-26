@@ -16,6 +16,8 @@ import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
 import androidx.core.content.ContextCompat;
+import butterknife.BindView;
+import butterknife.ButterKnife;
 
 import com.android.volley.Request;
 import com.android.volley.RequestQueue;
@@ -50,10 +52,15 @@ public class ExpandedResultActivity extends AppCompatActivity {
     private String MY_API_MOVIES_URL;
     private String MY_API_MOVIES_KEY;
 
-    //declare UI
-    private TextView tvTitle, tvYear, tvGenre;
-
-    private ImageView ivPoster;
+    //bind UI with butterknife
+    @BindView(R.id.tvTitle)
+    TextView tvTitle;
+    @BindView(R.id.tvYear)
+    TextView tvYear;
+    @BindView(R.id.tvGenre)
+    TextView tvGenre;
+    @BindView(R.id.ivPoster)
+    ImageView ivPoster;
 
     //declare important class variables
     private String imdbId;
@@ -70,6 +77,9 @@ public class ExpandedResultActivity extends AppCompatActivity {
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_expanded_results);
+
+        //bind UI with butterknife
+        ButterKnife.bind(this);
 
         //setup and inflate the toolbar
         Toolbar toolbar = (Toolbar) findViewById(R.id.my_toolbar);
@@ -169,12 +179,8 @@ public class ExpandedResultActivity extends AppCompatActivity {
         startActivity(settings);
     }
 
-    //lots of views to initialize
+    //lots of views to store for referencing
     private void initViews(){
-        ivPoster = findViewById(R.id.ivPoster);
-        tvTitle = findViewById(R.id.tvTitle);
-        tvYear = findViewById(R.id.tvYear);
-        tvGenre = findViewById(R.id.tvGenre);
 
         //ID arrays for referencing in loops
         tvNameID.add(R.id.tvName1);

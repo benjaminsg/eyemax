@@ -31,6 +31,9 @@ import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
 import androidx.core.content.ContextCompat;
+import butterknife.BindView;
+import butterknife.ButterKnife;
+import butterknife.OnItemClick;
 
 /*
  * Activity for getting and displaying all of the movies the group of passed in actors have in
@@ -56,17 +59,55 @@ public class DisplayMoviesActivity extends AppCompatActivity {
     private String MY_API_MOVIES_KEY_BACKUP;
     private String actorQS = "&name=";
 
-    //declare the listview
-    private ListView LV_display;
-
     //counters to avoid completing activity before async requests are completed
     private int sharedCounter;
     private int numFoundCelebs;
+
+    //bind list view
+    @BindView(R.id.LV_display)
+    ListView LV_display;
+
+    //list view on click listener
+    @OnItemClick(R.id.LV_display)
+    public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+
+        //pass information about the given movie to the expanded result activity
+        Intent intent = new Intent(getBaseContext(), ExpandedResultActivity.class);
+        Movie clickedMovie = sharedFilms.get(position);
+
+        intent.putExtra("Movie_Name", clickedMovie.getTitle());
+        intent.putExtra("IMDB_ID", clickedMovie.getImdbId());
+        intent.putExtra("year", clickedMovie.getReleaseYear());
+
+        System.out.println("listview movie name is: " + clickedMovie.getTitle());
+        System.out.println("listview movie imdbid is: " + clickedMovie.getImdbId());
+        System.out.println("listview movie year is: " + clickedMovie.getReleaseYear());
+
+        //check if the actors have common movies
+        if(clickedMovie.getTitle().equals("No common " +
+                "movies")) {
+            //display a toast if there are none
+            Context context =
+                    getApplicationContext();
+            CharSequence text = "No common " +
+                    "movies were found for " +
+                    "the provided actors";
+            int duration = Toast.LENGTH_SHORT;
+
+            Toast toast = Toast.makeText(
+                    context, text, duration);
+            toast.show();
+        } else {
+            startActivity(intent);
+        }
+    }
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_display_movies);
+
+        ButterKnife.bind(this);
 
         //setup and inflate the toolbar
         Toolbar toolbar = (Toolbar) findViewById(R.id.my_toolbar);
@@ -85,8 +126,6 @@ public class DisplayMoviesActivity extends AppCompatActivity {
         queue = Volley.newRequestQueue(this);
 
         sharedFilms = new ArrayList<Movie>();
-
-        LV_display = (ListView) findViewById(R.id.LV_display);
 
         //fetch sensitive information (API urls and keys) from config file
         try {
@@ -210,41 +249,6 @@ public class DisplayMoviesActivity extends AppCompatActivity {
 
             LV_display.setAdapter(displayAdapter);
 
-            LV_display.setOnItemClickListener(new AdapterView.OnItemClickListener() {
-                @Override
-                public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-
-                    //pass information about the given movie to the expanded result activity
-                    Intent intent = new Intent(getBaseContext(), ExpandedResultActivity.class);
-                    Movie clickedMovie = sharedFilms.get(position);
-
-                    intent.putExtra("Movie_Name", clickedMovie.getTitle());
-                    intent.putExtra("IMDB_ID", clickedMovie.getImdbId());
-                    intent.putExtra("year", clickedMovie.getReleaseYear());
-
-                    System.out.println("listview movie name is: " + clickedMovie.getTitle());
-                    System.out.println("listview movie imdbid is: " + clickedMovie.getImdbId());
-                    System.out.println("listview movie year is: " + clickedMovie.getReleaseYear());
-
-                    //check if the actors have common movies
-                    if(clickedMovie.getTitle().equals("No common " +
-                            "movies")) {
-                        //display a toast if there are none
-                        Context context =
-                                getApplicationContext();
-                        CharSequence text = "No common " +
-                                "movies were found for " +
-                                "the provided actors";
-                        int duration = Toast.LENGTH_SHORT;
-
-                        Toast toast = Toast.makeText(
-                                context, text, duration);
-                        toast.show();
-                    } else {
-                        startActivity(intent);
-                    }
-                }
-            });
         }
     }
 

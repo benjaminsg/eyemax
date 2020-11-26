@@ -5,6 +5,9 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
 import androidx.core.content.ContextCompat;
 import androidx.preference.PreferenceManager;
+import butterknife.BindView;
+import butterknife.ButterKnife;
+import butterknife.OnClick;
 
 import android.content.Context;
 import android.content.Intent;
@@ -48,10 +51,54 @@ public class IdentifyActivity extends AppCompatActivity {
     //declare image
     private Bitmap image;
 
+    //declare array list containing names of found celebrities
+    private ArrayList<String> foundCelebs;
+
+    //declare list adapter for saved names
+    private NamesListAdapter adapter;
+
+    //bind views using butterknife
+    @BindView(R.id.listView)
+    ListView lView;
+    @BindView(R.id.addBtn)
+    Button addButton;
+    @BindView(R.id.buttonNext)
+    Button buttonNext;
+    @BindView(R.id.addText)
+    EditText addText;
+
+    //set onclick listeners using butterknife
+
+    @OnClick(R.id.addBtn)
+    public void onClickAddButton (View v){
+        //when add button is clicked, add the actor in add text to the list
+        foundCelebs.add(addText.getText().toString());
+        adapter.notifyDataSetChanged();
+    }
+
+    @OnClick(R.id.buttonNext)
+    public void onClickButtonNext (View v) {
+        //when button next is clicked, ensure that foundCelebs has content then pass it to
+        //displayMovies to generate the next intent
+        if (foundCelebs.size() > 0) {
+            displayMovies(v, foundCelebs);
+        } else {
+            //if foundCelebs is empty, create a toast asking the user to add actors
+            Context context = getApplicationContext();
+            CharSequence text = "Please add actors before proceeding";
+            int duration = Toast.LENGTH_SHORT;
+
+            Toast toast = Toast.makeText(context, text, duration);
+            toast.show();
+        }
+    }
+
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_identify);
+
+        ButterKnife.bind(this);
 
         //setup and inflate the toolbar
         Toolbar toolbar = (Toolbar) findViewById(R.id.my_toolbar);
@@ -59,9 +106,6 @@ public class IdentifyActivity extends AppCompatActivity {
         toolbar.setTitleTextColor(ContextCompat.getColor(getApplicationContext(),
                 R.color.backgroundColor));
         setSupportActionBar(toolbar);
-
-        //declare array list containing names of found celebrities
-        ArrayList<String> foundCelebs;
 
         //get api keys from config
         try {
@@ -90,48 +134,11 @@ public class IdentifyActivity extends AppCompatActivity {
             foundCelebs = getCelebrities();
         }
 
-        //initialize edittext for adding additional actors
-        final EditText addText = (EditText)findViewById(R.id.addText);
-
         //instantiate custom adapter
-        final NamesListAdapter adapter = new NamesListAdapter(foundCelebs, this);
+        adapter = new NamesListAdapter(foundCelebs, this);
 
-        //handle listview and assign adapter
-        ListView lView = (ListView) findViewById(R.id.listView);
         lView.setAdapter(adapter);
 
-        Button addButton = findViewById(R.id.addBtn);
-
-        addButton.setOnClickListener(new View.OnClickListener(){
-
-            @Override
-            public void onClick(View v) {
-                //when add button is clicked, add the actor in add text to the list
-                foundCelebs.add(addText.getText().toString());
-                adapter.notifyDataSetChanged();
-            }
-        });
-
-        Button buttonNext = findViewById(R.id.buttonNext);
-
-        buttonNext.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                //when button next is clicked, ensure that foundCelebs has content then pass it to
-                //displayMovies to generate the next intent
-                if(foundCelebs.size() > 0) {
-                    displayMovies(v, foundCelebs);
-                } else {
-                    //if foundCelebs is empty, create a toast asking the user to add actors
-                    Context context = getApplicationContext();
-                    CharSequence text = "Please add actors before proceeding";
-                    int duration = Toast.LENGTH_SHORT;
-
-                    Toast toast = Toast.makeText(context, text, duration);
-                    toast.show();
-                }
-            }
-        });
     }
 
     @Override

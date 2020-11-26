@@ -14,6 +14,9 @@ import androidx.appcompat.widget.Toolbar;
 import androidx.core.content.ContextCompat;
 import androidx.core.content.FileProvider;
 import androidx.multidex.BuildConfig;
+import butterknife.BindView;
+import butterknife.ButterKnife;
+import butterknife.OnClick;
 
 import android.os.Environment;
 import android.provider.MediaStore;
@@ -45,25 +48,55 @@ import java.util.Objects;
 
 public class MainActivity extends AppCompatActivity {
 
-    //declare UI
-    private EditText editTextActor;
-
-    private Button buttonIdentify;
-
-    private SearchView searchView;
-
-    ImageView IDProf;
-    Button Upload_Btn;
-
     //declare class variables
     String currentPhotoPath;
 
     private Bitmap currImage;
 
+    //bind views using butterknife
+    @BindView(R.id.searchView)
+    SearchView searchView;
+    @BindView(R.id.button_identify)
+    Button buttonIdentify;
+    @BindView(R.id.IdProf)
+    ImageView IDProf;
+    @BindView(R.id.UploadBtn)
+    Button Upload_Btn;
+
+    @OnClick(R.id.button_identify)
+    public void onClickButtonIdentify (View v) {
+        //check if image exists then create intent
+        if (currImage == null) {
+            Context context = getApplicationContext();
+            CharSequence text = "Please upload an image before proceeding";
+            int duration = Toast.LENGTH_SHORT;
+
+            Toast toast = Toast.makeText(context, text, duration);
+            toast.show();
+        } else {
+            identify(v);
+        }
+    }
+
+    //when image is clicked call function to get image
+    @OnClick(R.id.IdProf)
+    public void onClickIdProf (View v){
+        selectImage();
+    }
+
+    //same functionality as above with upload button
+    @OnClick(R.id.UploadBtn)
+    public void onClickUploadButton (View v){
+        selectImage();
+    }
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+
+        //bind UI with butterknife
+        ButterKnife.bind(this);
 
         //setup and inflate the toolbar
         Toolbar toolbar = (Toolbar) findViewById(R.id.my_toolbar);
