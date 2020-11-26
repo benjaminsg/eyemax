@@ -31,6 +31,11 @@ import java.nio.ByteBuffer;
 import java.util.ArrayList;
 import java.util.List;
 
+//Butterknife imports
+import butterknife.BindView;
+import butterknife.ButterKnife;
+import butterknife.OnClick;
+
 /*
  * Activity to identify the celebrities in an image
  */
@@ -44,10 +49,20 @@ public class IdentifyActivity extends Activity {
     //declare image
     private Bitmap image;
 
+    @BindView(R.id.listView)
+    ListView lview;
+    @BindView(R.id.addBtn)
+    Button addButton;
+    @BindView(R.id.buttonNext)
+    Button buttonNext;
+    @BindView(R.id.addText)
+    EditText addText;
+
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_identify);
+        ButterKnife.bind(this);
 
         //declare array list containing names of found celebrities
         ArrayList<String> foundCelebs;
@@ -80,47 +95,37 @@ public class IdentifyActivity extends Activity {
         }
 
         //initialize edittext for adding additional actors
-        final EditText addText = (EditText)findViewById(R.id.addText);
+        //final EditText addText = (EditText)findViewById(R.id.addText);
 
         //instantiate custom adapter
         final NamesListAdapter adapter = new NamesListAdapter(foundCelebs, this);
 
-        //handle listview and assign adapter
-        ListView lView = (ListView) findViewById(R.id.listView);
+        //assign adapter to list view
         lView.setAdapter(adapter);
 
-        Button addButton = findViewById(R.id.addBtn);
+        @OnClick(R.id.addBtn)
+        public void onClick (View v){
+            //when add button is clicked, add the actor in add text to the list
+            foundCelebs.add(addText.getText().toString());
+            adapter.notifyDataSetChanged();
+        }
 
-        addButton.setOnClickListener(new View.OnClickListener(){
+        @OnClick(R.id.buttonNext)
+        public void onClick (View v){
+            //when button next is clicked, ensure that foundCelebs has content then pass it to
+            //displayMovies to generate the next intent
+            if (foundCelebs.size() > 0) {
+                displayMovies(v, foundCelebs);
+            } else {
+                //if foundCelebs is empty, create a toast asking the user to add actors
+                Context context = getApplicationContext();
+                CharSequence text = "Please add actors before proceeding";
+                int duration = Toast.LENGTH_SHORT;
 
-            @Override
-            public void onClick(View v) {
-                //when add button is clicked, add the actor in add text to the list
-                foundCelebs.add(addText.getText().toString());
-                adapter.notifyDataSetChanged();
+                Toast toast = Toast.makeText(context, text, duration);
+                toast.show();
             }
-        });
-
-        Button buttonNext = findViewById(R.id.buttonNext);
-
-        buttonNext.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                //when button next is clicked, ensure that foundCelebs has content then pass it to
-                //displayMovies to generate the next intent
-                if(foundCelebs.size() > 0) {
-                    displayMovies(v, foundCelebs);
-                } else {
-                    //if foundCelebs is empty, create a toast asking the user to add actors
-                    Context context = getApplicationContext();
-                    CharSequence text = "Please add actors before proceeding";
-                    int duration = Toast.LENGTH_SHORT;
-
-                    Toast toast = Toast.makeText(context, text, duration);
-                    toast.show();
-                }
-            }
-        });
+        }
     }
 
     //get celebrities from AWS Rekognition

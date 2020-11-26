@@ -33,6 +33,11 @@ import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.Objects;
 
+//ButterKnife Imports
+import butterknife.BindView;
+import butterknife.ButterKnife;
+import butterknife.OnClick;
+
 /*
  * MainActivity to get a photo from the device through storage or the camera and pass it to
  * IdentifyActivity or get an actor as a search to pass to IdentifyActivity
@@ -43,11 +48,15 @@ public class MainActivity extends AppCompatActivity {
     //declare UI
     private EditText editTextActor;
 
-    private Button buttonIdentify;
-
-    private SearchView searchView;
-
+    @BindView(R.id.searchView)
+    SearchView searchView;
+    @BindView(R.id.button_identify)
+    Button buttonIdentify;
+    @BindView(R.id.buttonPreferences)
+    Button buttonPreferences;
+    @BindView(R.id.IdProf)
     ImageView IDProf;
+    @BindView(R.id.UploadBtn)
     Button Upload_Btn;
 
     //declare class variables
@@ -60,8 +69,8 @@ public class MainActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
-        //initialize UI
-        searchView = (SearchView) findViewById(R.id.searchView);
+        //bind UI with butterknife
+        ButterKnife.bind(this);
 
         //handle text actor search
         searchView.setOnQueryTextListener(new SearchView.OnQueryTextListener() {
@@ -90,58 +99,41 @@ public class MainActivity extends AppCompatActivity {
 
         });
 
-        buttonIdentify = (Button) findViewById(R.id.button_identify);
         buttonIdentify.setEnabled(false);
 
         //button to send image to intent
-        buttonIdentify.setOnClickListener(new View.OnClickListener(){
+        @OnClick(R.id.button_identify)
+        public void onClick (View v){
+            //check if image exists then create intent
+            if (currImage == null) {
+                Context context = getApplicationContext();
+                CharSequence text = "Please upload an image before proceeding";
+                int duration = Toast.LENGTH_SHORT;
 
-            @Override
-            public void onClick(View v) {
-                //check if image exists then create intent
-                if(currImage == null) {
-                    Context context = getApplicationContext();
-                    CharSequence text = "Please upload an image before proceeding";
-                    int duration = Toast.LENGTH_SHORT;
-
-                    Toast toast = Toast.makeText(context, text, duration);
-                    toast.show();
-                } else {
-                    identify(v);
-                }
+                Toast toast = Toast.makeText(context, text, duration);
+                toast.show();
+            } else {
+                identify(v);
             }
-        });
-
-        Button buttonPreferences = (Button) findViewById(R.id.buttonPreferences);
+        }
 
         //button for creating intent for navigating to settings
-        buttonPreferences.setOnClickListener(new View.OnClickListener(){
+        @OnClick(R.id.buttonPreferences)
+        public void onClick (View v){
+            settings(v);
+        }
 
-            @Override
-            public void onClick(View v) {
-                settings(v);
-            }
-        });
-
-        IDProf=(ImageView)findViewById(R.id.IdProf);
-        Upload_Btn=(Button)findViewById(R.id.UploadBtn);
-
-        //when image is clicked call function to get image
-        IDProf.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                selectImage();
-            }
-        });
+          //when image is clicked call function to get image
+        @OnClick(R.id.IdProf)
+        public void onClick (View v){
+            selectImage();
+        }
 
         //same functionality as above with upload button
-        Upload_Btn.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                selectImage();
-            }
-        });
-
+        @OnClick(R.id.UploadBtn)
+        public void onClick (View v){
+            selectImage();
+        }
     }
 
     //create intent for IdenitfyActivity passing image

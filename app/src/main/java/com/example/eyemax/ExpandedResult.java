@@ -27,6 +27,10 @@ import java.net.MalformedURLException;
 import java.net.URL;
 import java.util.ArrayList;
 
+//Butterknife imports
+import butterknife.BindView;
+import butterknife.ButterKnife;
+
 /*
  * Activity for getting and displaying information about a given movie, including relevant genre,
  * cast, and images.
@@ -45,10 +49,15 @@ public class ExpandedResult extends Activity {
     private String MY_API_MOVIES_URL;
     private String MY_API_MOVIES_KEY;
 
-    //declare UI
-    private TextView tvTitle, tvYear, tvGenre;
-
-    private ImageView ivPoster;
+    //bind UI with butterknife
+    @BindView(R.id.tvTitle)
+    TextView tvTitle;
+    @BindView(R.id.tvYear)
+    TextView tvYear;
+    @BindView(R.id.tvGenre)
+    TextView tvGenre;
+    @BindView(R.id.ivPoster)
+    TextView ivPoster;
 
     //declare important class variables
     private String imdbId;
@@ -65,6 +74,9 @@ public class ExpandedResult extends Activity {
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.expanded_results);
+
+        //bind UI with butterknife
+        ButterKnife.bind(this);
 
         //initialize shared preferences
         sharedPref = getPreferences(Context.MODE_PRIVATE);
@@ -126,13 +138,8 @@ public class ExpandedResult extends Activity {
         }
     }
 
-    //lots of views to initialize
+    //lots of views to store for referencing
     private void initViews(){
-        ivPoster = findViewById(R.id.ivPoster);
-        tvTitle = findViewById(R.id.tvTitle);
-        tvYear = findViewById(R.id.tvYear);
-        tvGenre = findViewById(R.id.tvGenre);
-
         //ID arrays for referencing in loops
         tvNameID.add(R.id.tvName1);
         tvNameID.add(R.id.tvName2);

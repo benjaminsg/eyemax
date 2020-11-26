@@ -15,8 +15,7 @@ import androidx.preference.PreferenceFragmentCompat;
  */
 
 public class SettingsActivity extends AppCompatActivity implements SharedPreferences
-        .OnSharedPreferenceChangeListener
-{
+        .OnSharedPreferenceChangeListener {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
