@@ -12,7 +12,6 @@ import androidx.appcompat.app.AppCompatActivity;
 import android.content.SharedPreferences;
 
 import androidx.preference.Preference;
-import androidx.preference.PreferenceCategory;
 import androidx.preference.PreferenceFragmentCompat;
 import androidx.preference.SeekBarPreference;
 
@@ -71,9 +70,11 @@ public class SettingsActivity extends AppCompatActivity implements SharedPrefere
                         }
                     };
 
+                    //ask user to confirm
                     AlertDialog.Builder builder = new AlertDialog.Builder(getContext());
-                    builder.setMessage("WARNING: This will remove all cached data. New data will need to be fetched resulting in additional API requests and slower page loading. Are you sure?").setPositiveButton("Yes", dialogClickListener)
-                            .setNegativeButton("No", dialogClickListener).show();
+                    builder.setMessage(getString(R.string.cache_warning_message))
+                            .setPositiveButton(getString(R.string.yes), dialogClickListener)
+                            .setNegativeButton(getString(R.string.no), dialogClickListener).show();
 
                     return true;
                 }
@@ -82,10 +83,12 @@ public class SettingsActivity extends AppCompatActivity implements SharedPrefere
             SeekBarPreference matchConfidenceSeekBarPref = findPreference(getString(R.string.match_sensitivity));
 
             Preference restoreDefaultsButton = findPreference("restoreDefaultsButton");
-            restoreDefaultsButton.setOnPreferenceClickListener(new Preference.OnPreferenceClickListener() {
+            restoreDefaultsButton.setOnPreferenceClickListener(new Preference
+                    .OnPreferenceClickListener() {
                 @Override
                 public boolean onPreferenceClick(Preference preference) {
-                    DialogInterface.OnClickListener dialogClickListener = new DialogInterface.OnClickListener() {
+                    DialogInterface.OnClickListener dialogClickListener = new DialogInterface
+                            .OnClickListener() {
                         @Override
                         public void onClick(DialogInterface dialog, int which) {
                             switch (which){
@@ -102,8 +105,9 @@ public class SettingsActivity extends AppCompatActivity implements SharedPrefere
                     };
 
                     AlertDialog.Builder builder = new AlertDialog.Builder(getContext());
-                    builder.setMessage("This will reset all preferences to their default values. Are you sure?").setPositiveButton("Yes", dialogClickListener)
-                            .setNegativeButton("No", dialogClickListener).show();
+                    builder.setMessage(getString(R.string.defaults_warning_message))
+                            .setPositiveButton(getString(R.string.yes), dialogClickListener)
+                            .setNegativeButton(getString(R.string.no), dialogClickListener).show();
 
                     return true;
                 }

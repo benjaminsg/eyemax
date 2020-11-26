@@ -2,7 +2,8 @@
 <resources>
     <string name="app_name">Eyemax</string>
     <string name="welcome_to_eyemax">Bienvenue sur Eyemax</string>
-    <string name="please_upload_an_image_of_actors_from_any_tv_show_or_movie">Veuillez télécharger une image des acteurs de toute émission télévisée ou film</string>
+    <string name="please_upload_an_image_of_actors_from_any_tv_show_or_movie">Veuillez télécharger
+        une image des acteurs de toute émission télévisée ou film</string>
     <string name="action_settings">Réglages</string>
 
     <string name="dark_mode">Dark Mode</string>
@@ -27,11 +28,25 @@
     <string name="loading_character">Chargement du caractère...</string>
     <string name="textview">TexteVue</string>
     <string name="delete">Supprimez</string>
-    <string name="or_search_using_actor_names_below">Ou recherchez en utilisant les noms d\'acteurs ci-dessous</string>
+    <string name="or_search_using_actor_names_below">Ou recherchez en utilisant les noms d\'acteurs
+        ci-dessous</string>
     <string name="enter_name_of_actor_to_add">Entrez le nom de l\'acteur à ajouter</string>
     <string name="next">Prochain</string>
     <string name="add_photo">Ajouter une Photo!</string>
     <string name="take_photo">Prendre une Photo</string>
     <string name="choose_from_gallery">Choisir depuis la Galerie</string>
     <string name="cancel">Annulez</string>
+    <string name="cache_warning_message">AVERTISSEMENT: cela supprimera toutes les données mises en
+        cache. Les nouvelles données doivent être récupérés, ce qui entraîne des demandes d\'API
+        supplémentaires et un chargement de page plus lent. Es-tu sûr?</string>
+    <string name="yes">Oui</string>
+    <string name="no">Non</string>
+    <string name="defaults_warning_message">Cela réinitialisera toutes les préférences à leurs
+        valeurs par défaut. Êtes-vous sûr?</string>
+    <string name="removes_cached_local_data">Supprime les données locales mises en cache</string>
+    <string name="restores_all_preferences_to_their_default_values">Restaure toutes les préférences
+        sur leurs valeurs par défaut</string>
+    <string name="match_accuracy">Précision du Match</string>
+    <string name="clear_cache">Videz le cache</string>
+    <string name="reset_defaults">Réinitialisez par défaut</string>
 </resources>

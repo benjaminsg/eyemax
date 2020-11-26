@@ -1,7 +1,8 @@
 <resources>
     <string name="app_name">Eyemax</string>
     <string name="welcome_to_eyemax">Welcome to Eyemax</string>
-    <string name="please_upload_an_image_of_actors_from_any_tv_show_or_movie">Please upload an image of actors from any TV show or movie</string>
+    <string name="please_upload_an_image_of_actors_from_any_tv_show_or_movie">Please upload an image
+        of actors from any TV show or movie</string>
     <string name="action_settings">Settings</string>
 
     <string name="dark_mode">Dark Mode</string>
@@ -33,4 +34,17 @@
     <string name="take_photo">Take Photo</string>
     <string name="choose_from_gallery">Choose from Gallery</string>
     <string name="cancel">Cancel</string>
+    <string name="cache_warning_message">WARNING: This will remove all cached data. New data will
+        need to be fetched resulting in additional API requests and slower page loading. Are you
+        sure?</string>
+    <string name="yes">Yes</string>
+    <string name="no">No</string>
+    <string name="defaults_warning_message">This will reset all preferences to their default values.
+        Are you sure?</string>
+    <string name="removes_cached_local_data">Removes cached local data</string>
+    <string name="restores_all_preferences_to_their_default_values">Restores all preferences to
+        their default values</string>
+    <string name="match_accuracy">Match Accuracy</string>
+    <string name="clear_cache">Clear cache</string>
+    <string name="reset_defaults">Reset defaults</string>
 </resources>

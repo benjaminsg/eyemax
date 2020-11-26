@@ -11,7 +11,7 @@
             android:key="@string/match_sensitivity"
             android:summary="@string/match_summary"
             android:max="100"
-            android:title="Match Accuracy"
+            android:title="@string/match_accuracy"
             app:showSeekBarValue="true"
             app:defaultValue="70"
             app:min="0"
@@ -20,13 +20,13 @@
     </PreferenceCategory>
 
     <Preference
-        android:title="Clear cache"
+        android:title="@string/clear_cache"
         android:key="resetCacheButton"
-        android:summary="Removes cached local data" />
+        android:summary="@string/removes_cached_local_data" />
 
     <Preference
-        android:title="Reset defaults"
+        android:title="@string/reset_defaults"
         android:key="restoreDefaultsButton"
-        android:summary="Restores all preferences to their default values" />
+        android:summary="@string/restores_all_preferences_to_their_default_values" />
 
 </PreferenceScreen>
