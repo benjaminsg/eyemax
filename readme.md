@@ -7,7 +7,7 @@ If build errors occur following initial gradle sync, please review AWS Amplify d
 
 Instructions for testing: Click upload or the image of the film frame on the first screen of the app. From here you can upload an image from your phone, then select 'Identify.'
 
-For example images to test the app on, try using the images in drawable/examples. These images will need to be moved to the storage on your device before they can be accessed.
+For example images to test the app on, try using the images in provided examples folder. These images will need to be moved to the storage on your device before they can be accessed.
 When testing using a picture uploaded from the camera, make sure the picture has a clear view of the faces of the celebrities.
 
 You can also type in the name of an actor at the bottom of the screen by clicking on the search bar.
@@ -17,3 +17,7 @@ On the following screen, add or remove the names of actors as you see fit. When 
 On the resulting screen, a list of movies will be displayed. Any of these movies can be clicked on to display additional information about the film.
 
 On the toolbar, select 'Settings' to review adjustable settings such as changing the match frequency and clearing the cache.
+
+Extra credit: Butterknife (in all regular activities)
+              Fragments (in SettingsActivity)
+              Translation (French)

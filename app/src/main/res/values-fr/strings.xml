@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="app_name">Eyemax</string>
+    <string name="welcome_to_eyemax">Bienvenue sur Eyemax</string>
+    <string name="please_upload_an_image_of_actors_from_any_tv_show_or_movie">Veuillez télécharger une image des acteurs de toute émission télévisée ou film</string>
+    <string name="action_settings">Réglages</string>
+
+    <string name="dark_mode">Dark Mode</string>
+    <string name="dark_mode_def_value">MODE_NIGHT_FOLLOW_SYSTEM</string>
+
+    <string name="display_text">Afficher le Texte</string>
+    <string name="change_text_color">Couleur du Texte</string>
+    <string name="text_size">Taille du Texte</string>
+    <string name="match_sensitivity">Sensibilité du Match</string>
+    <string name="match_summary">Choisissez le niveau de précision du match</string>
+    <string name="add">Ajoutez</string>
+    <string name="preferences">Préférences</string>
+    <string name="upload">Téléchargez</string>
+    <string name="identify">Identifiez</string>
+    <string name="enter_an_actor">Entrez un acteur</string>
+    <string name="search">Cherchez</string>
+    <string name="loading_title">Chargement du titre</string>
+    <string name="released">Libéré:</string>
+    <string name="genre">Genre:</string>
+    <string name="cast">Casting</string>
+    <string name="loading_name">Nom de chargement...</string>
+    <string name="loading_character">Chargement du caractère...</string>
+    <string name="textview">TexteVue</string>
+    <string name="delete">Supprimez</string>
+    <string name="or_search_using_actor_names_below">Ou recherchez en utilisant les noms d\'acteurs ci-dessous</string>
+    <string name="enter_name_of_actor_to_add">Entrez le nom de l\'acteur à ajouter</string>
+    <string name="next">Prochain</string>
+    <string name="add_photo">Ajouter une Photo!</string>
+    <string name="take_photo">Prendre une Photo</string>
+    <string name="choose_from_gallery">Choisir depuis la Galerie</string>
+    <string name="cancel">Annulez</string>
+</resources>

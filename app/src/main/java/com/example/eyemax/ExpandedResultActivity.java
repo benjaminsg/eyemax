@@ -221,7 +221,8 @@ public class ExpandedResultActivity extends AppCompatActivity {
         if(movieYear == -1) {
             tvYear.setText("");
         } else {
-            tvYear.setText("Released: " + movieYear);
+            String releasedTextToDisplay = getString(R.string.released) + " " + movieYear;
+            tvYear.setText(releasedTextToDisplay);
         }
 
         //set thread policy for making network requests

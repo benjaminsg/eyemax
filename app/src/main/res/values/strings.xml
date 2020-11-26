@@ -26,4 +26,11 @@
     <string name="loading_character">Loading Character...</string>
     <string name="textview">TextView</string>
     <string name="delete">Delete</string>
+    <string name="or_search_using_actor_names_below">Or search using actor names below</string>
+    <string name="enter_name_of_actor_to_add">Enter name of actor to add</string>
+    <string name="next">Next</string>
+    <string name="add_photo">Add Photo!</string>
+    <string name="take_photo">Take Photo</string>
+    <string name="choose_from_gallery">Choose from Gallery</string>
+    <string name="cancel">Cancel</string>
 </resources>

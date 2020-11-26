@@ -76,7 +76,7 @@
             android:layout_height="wrap_content"
             android:layout_marginTop="20dp"
             android:layout_marginLeft="10dp"
-            android:text="Or search using actor names below" />
+            android:text="@string/or_search_using_actor_names_below" />
 
         <SearchView
             android:id="@+id/searchView"

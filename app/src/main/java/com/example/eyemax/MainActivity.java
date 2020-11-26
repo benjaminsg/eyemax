@@ -273,23 +273,23 @@ public class MainActivity extends AppCompatActivity {
 
     //create menu for choosing option for getting photo
     private void selectImage() {
-        final CharSequence[] options = { "Take Photo", "Choose from Gallery","Cancel" };
+        final CharSequence[] options = { getString(R.string.take_photo), getString(R.string.choose_from_gallery), getString(R.string.cancel) };
         AlertDialog.Builder builder = new AlertDialog.Builder(MainActivity.this);
-        builder.setTitle("Add Photo!");
+        builder.setTitle(getString(R.string.add_photo));
         builder.setItems(options, new DialogInterface.OnClickListener() {
             @Override
             public void onClick(DialogInterface dialog, int item) {
-                if (options[item].equals("Take Photo"))
+                if (options[item].equals(getString(R.string.take_photo)))
                 {
                     dispatchTakePictureIntent();
                 }
-                else if (options[item].equals("Choose from Gallery"))
+                else if (options[item].equals(getString(R.string.choose_from_gallery)))
                 {
                     Intent intent = new Intent(Intent.ACTION_PICK,android.provider.MediaStore.Images
                             .Media.EXTERNAL_CONTENT_URI);
                     startActivityForResult(intent, 2);
                 }
-                else if (options[item].equals("Cancel")) {
+                else if (options[item].equals(getString(R.string.cancel))) {
                     dialog.dismiss();
                 }
             }
